@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Department;
+use App\Models\Employee;
+use App\Models\Job;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,13 +20,14 @@ return new class extends Migration
             $table->string("last_name");
             $table->date("date_of_birth");
             $table->string("gender");
-            $table->string("address");
-            $table->string("phone_number");
-            $table->string("email");
-            $table->string("hire_date");
-            $table->string("salary_id");
-            $table->string("department_id");
-            $table->string("position_id");
+            $table->date("hire_date");
+            $table->foreignIdFor(Job::class)->cascadeOnDelete();
+            $table->foreignIdFor(Department::class)->cascadeOnDelete();
+            $table->foreignIdFor(Employee::class)->nullable()->nullOnDelete();
+            $table->decimal('salary', 10, 2);
+            $table->string('address');
+            $table->string('email')->unique();
+            $table->string('phoneNumber')->unique();
             $table->timestamps();
         });
     }

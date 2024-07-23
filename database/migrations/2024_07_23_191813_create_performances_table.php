@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('performances', function (Blueprint $table) {
             $table->id();
-            $table->string("employee_id");
-            $table->date("evaluation_date");
-            $table->string("score");
-            $table->string("remarks");
+            $table->foreignId('employee_id')->constrained('employees')->cascadeOnDelete();
+            $table->date('review_date');
+            $table->integer('review_score');
+            $table->text('comments');
             $table->timestamps();
         });
     }

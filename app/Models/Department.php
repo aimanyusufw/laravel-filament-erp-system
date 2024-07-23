@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'departmentID');
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo(Employee::class, 'managerID');
+    }
 }
